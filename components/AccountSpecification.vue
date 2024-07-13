@@ -7,10 +7,7 @@ interface Weapon {
   name: string;
 }
 
-const limitedCharacters = ref<Character[]>([]);
-const standardCharacters = ref<Character[]>([]);
-const limitedWeapons = ref<Weapon[]>([]);
-const standardWeapons = ref<Weapon[]>([]);
+const form = useAccountFormStore();
 
 const limitedCharacterOptions: Character[] = [
   { name: 'Albedo' },
@@ -35,7 +32,7 @@ const limitedCharacterOptions: Character[] = [
   { name: 'Navia' },
   { name: 'Neuvillette' },
   { name: 'Nilou' },
-  { name: 'Raiden' },
+  { name: 'Raiden Shogun' },
   { name: 'Shenhe' },
   { name: 'Sigewinne' },
   { name: 'Tartaglia' },
@@ -119,25 +116,25 @@ const standardWeaponOptions: Weapon[] = [
     <SharedSelector
       label="Limited Characters"
       :options="limitedCharacterOptions"
-      v-model="limitedCharacters"
+      v-model="form.limitedCharacters"
       toggle-attribute="isWellBuild"
     />
     <SharedSelector
       label="Standard Characters"
       :options="standardCharacterOptions"
-      v-model="standardCharacters"
+      v-model="form.standardCharacters"
       toggle-attribute="isWellBuild"
     />
     <SharedSelector
       label="Limited Weapons"
       :options="limitedWeaponOptions"
-      v-model="limitedWeapons"
+      v-model="form.limitedWeapons"
       toggle-attribute="isSignature"
     />
     <SharedSelector
       label="Standard Weapons"
       :options="standardWeaponOptions"
-      v-model="standardWeapons"
+      v-model="form.standardWeapons"
       toggle-attribute="isSignature"
     />
   </div>

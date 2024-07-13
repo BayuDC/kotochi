@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const form = useAccountFormStore();
+</script>
 
 <template>
   <AccountInformation />
@@ -6,7 +8,7 @@
   <AccountGenerated />
   <UDivider class="mb-4 mt-8" />
   <div class="flex gap-2">
-    <UButton label="Generate" />
+    <UButton label="Generate" @click="form.generate" />
     <UButton label="Save" class="ml-auto" />
   </div>
 </template>
