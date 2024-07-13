@@ -81,8 +81,8 @@ export const useAccountFormStore = defineStore('account-form', () => {
   }
 
   function generatePrice() {
-    const limitedChar = character.limited.reguler.length * 32500;
-    const limitedWellChar = character.limited.wellBuild.length * 47500;
+    const limitedChar = character.limited.reguler.length * 30000;
+    const limitedWellChar = character.limited.wellBuild.length * 45000;
     const standardChar = character.standard.reguler.length * 5000;
     const standardWellChar = character.standard.wellBuild.length * 5000;
     const limitedWeap = weapon.limited.reguler.length * 10000;

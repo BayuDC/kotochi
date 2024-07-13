@@ -1,113 +1,36 @@
 <script setup lang="ts">
-interface Character {
-  name: string;
-  isWellBuild?: boolean;
-}
-interface Weapon {
-  name: string;
-}
-
 const form = useAccountFormStore();
+const character = useCharacterData();
+const weapon = useWeaponData();
 
-const limitedCharacterOptions: Character[] = [
-  { name: 'Albedo' },
-  { name: 'Alhaitham' },
-  { name: 'Arlecchino' },
-  { name: 'Ayaka' },
-  { name: 'Ayato' },
-  { name: 'Baizhu' },
-  { name: 'Chiori' },
-  { name: 'Clorinde' },
-  { name: 'Cyno' },
-  { name: 'Eula' },
-  { name: 'Furina' },
-  { name: 'Ganyu' },
-  { name: 'Hu Tao' },
-  { name: 'Itto' },
-  { name: 'Kazuha' },
-  { name: 'Klee' },
-  { name: 'Kokomi' },
-  { name: 'Lyney' },
-  { name: 'Nahida' },
-  { name: 'Navia' },
-  { name: 'Neuvillette' },
-  { name: 'Nilou' },
-  { name: 'Raiden Shogun' },
-  { name: 'Shenhe' },
-  { name: 'Sigewinne' },
-  { name: 'Tartaglia' },
-  { name: 'Venti' },
-  { name: 'Wanderer' },
-  { name: 'Wriothesley' },
-  { name: 'Xianyun' },
-  { name: 'Xiao' },
-  { name: 'Yae Miko' },
-  { name: 'Yelan' },
-  { name: 'Yoimiya' },
-  { name: 'Zhongli' },
-];
+const charLimited = ref<Character[]>([]);
+const weapLimited = ref<Weapon[]>([]);
+const charStandard = ref<Character[]>([]);
+const weapStandard = ref<Weapon[]>([]);
 
-const standardCharacterOptions: Character[] = [
-  { name: 'Dehya' },
-  { name: 'Diluc' },
-  { name: 'Jean' },
-  { name: 'Keqing' },
-  { name: 'Mona' },
-  { name: 'Qiqi' },
-  { name: 'Tighnari' },
-];
+watch(charLimited, watchChar);
+watch(charStandard, watchChar);
+watch(weapLimited, watchWeap);
+watch(weapStandard, watchWeap);
 
-const limitedWeaponOptions: Weapon[] = [
-  { name: 'A Thousand Floating Dreams' },
-  { name: 'Absolution' },
-  { name: 'Aqua Simulacra' },
-  { name: 'Beacon of the Reed Sea' },
-  { name: 'Calamity Queller' },
-  { name: 'Cashflow Supervision' },
-  { name: "Crane's Echoing Call" },
-  { name: "Crimson Moon's Semblance" },
-  { name: 'Elegy for the End' },
-  { name: 'Engulfing Lightning' },
-  { name: 'Everlasting Moonglow' },
-  { name: 'Freedom-Sworn' },
-  { name: 'Haran Geppaku Futsu' },
-  { name: "Hunter's Path" },
-  { name: "Jadefall's Splendor" },
-  { name: "Kagura's Verity" },
-  { name: 'Key of Khaj-Nisut' },
-  { name: 'Light of Foliar Incision' },
-  { name: 'Memory of Dust' },
-  { name: 'Mistsplitter Reforged' },
-  { name: 'Polar Star' },
-  { name: 'Primordial Jade Cutter' },
-  { name: 'Redhorn Stonethresher' },
-  { name: 'Silvershower Heartstrings' },
-  { name: 'Song of Broken Pines' },
-  { name: 'Splendor of Tranquil Waters' },
-  { name: 'Staff of Homa' },
-  { name: 'Staff of the Scarlet Sands' },
-  { name: 'Summit Shaper' },
-  { name: 'The First Great Magic' },
-  { name: 'The Unforged' },
-  { name: 'Thundering Pulse' },
-  { name: 'Tome of the Eternal Flow' },
-  { name: "Tulaytullah's Remembrance" },
-  { name: 'Uraku Misugiri' },
-  { name: 'Verdict' },
-  { name: 'Vortex Vanquisher' },
-];
-const standardWeaponOptions: Weapon[] = [
-  { name: "Amos' Bow" },
-  { name: 'Aquila Favonia' },
-  { name: 'Lost Prayer to the Sacred Winds' },
-  { name: 'Primordial Jade Winged-Spear' },
-  { name: 'Skyward Atlas' },
-  { name: 'Skyward Blade' },
-  { name: 'Skyward Harp' },
-  { name: 'Skyward Pride' },
-  { name: 'Skyward Spine' },
-  { name: "Wolf's Gravestone" },
-];
+function watchChar(now: Character[], prev: Character[]) {
+  let char = (now.length > prev.length ? now.filter(x => !prev.includes(x)) : prev.filter(x => !now.includes(x)))[0];
+
+  const weap = weapLimited.value.find(w => w.owner == char.name) || weapStandard.value.find(w => w.owner == char.name);
+
+  if (!weap) return;
+  char.hasSignature = !char.hasSignature;
+  weap.isSignature = !weap.isSignature;
+}
+function watchWeap(now: Weapon[], prev: Weapon[]) {
+  let weap = (now.length > prev.length ? now.filter(x => !prev.includes(x)) : prev.filter(x => !now.includes(x)))[0];
+
+  const char = charLimited.value.find(c => c.name == weap.owner) || charStandard.value.find(c => c.name == weap.owner);
+
+  if (!char) return;
+  char.hasSignature = !char.hasSignature;
+  weap.isSignature = !weap.isSignature;
+}
 </script>
 
 <template>
@@ -115,26 +38,26 @@ const standardWeaponOptions: Weapon[] = [
   <div class="grid grid-cols-4 gap-4">
     <SharedSelector
       label="Limited Characters"
-      :options="limitedCharacterOptions"
-      v-model="form.limitedCharacters"
+      :options="character.limited"
+      v-model="charLimited"
       toggle-attribute="isWellBuild"
     />
     <SharedSelector
       label="Standard Characters"
-      :options="standardCharacterOptions"
-      v-model="form.standardCharacters"
+      :options="character.standard"
+      v-model="charStandard"
       toggle-attribute="isWellBuild"
     />
     <SharedSelector
       label="Limited Weapons"
-      :options="limitedWeaponOptions"
-      v-model="form.limitedWeapons"
+      :options="weapon.limited"
+      v-model="weapLimited"
       toggle-attribute="isSignature"
     />
     <SharedSelector
       label="Standard Weapons"
-      :options="standardWeaponOptions"
-      v-model="form.standardWeapons"
+      :options="weapon.standard"
+      v-model="weapStandard"
       toggle-attribute="isSignature"
     />
   </div>
