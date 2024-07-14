@@ -1,22 +1,19 @@
 <script setup lang="ts">
-const form = useAccountFormStore();
+const store = useAccountStore();
+
 const character = useCharacterData();
 const weapon = useWeaponData();
 
-const charLimited = ref<Character[]>([]);
-const weapLimited = ref<Weapon[]>([]);
-const charStandard = ref<Character[]>([]);
-const weapStandard = ref<Weapon[]>([]);
-
-watch(charLimited, watchChar);
-watch(charStandard, watchChar);
-watch(weapLimited, watchWeap);
-watch(weapStandard, watchWeap);
+watch(() => store.data.limitedChars, watchChar);
+watch(() => store.data.standardChars, watchChar);
+watch(() => store.data.limitedWeaps, watchWeap);
+watch(() => store.data.standardWeaps, watchWeap);
 
 function watchChar(now: Character[], prev: Character[]) {
   let char = (now.length > prev.length ? now.filter(x => !prev.includes(x)) : prev.filter(x => !now.includes(x)))[0];
 
-  const weap = weapLimited.value.find(w => w.owner == char.name) || weapStandard.value.find(w => w.owner == char.name);
+  const weap =
+    store.data.limitedWeaps.find(w => w.owner == char.name) || store.data.standardWeaps.find(w => w.owner == char.name);
 
   if (!weap) return;
   char.hasSignature = !char.hasSignature;
@@ -25,7 +22,8 @@ function watchChar(now: Character[], prev: Character[]) {
 function watchWeap(now: Weapon[], prev: Weapon[]) {
   let weap = (now.length > prev.length ? now.filter(x => !prev.includes(x)) : prev.filter(x => !now.includes(x)))[0];
 
-  const char = charLimited.value.find(c => c.name == weap.owner) || charStandard.value.find(c => c.name == weap.owner);
+  const char =
+    store.data.limitedChars.find(c => c.name == weap.owner) || store.data.standardChars.find(c => c.name == weap.owner);
 
   if (!char) return;
   char.hasSignature = !char.hasSignature;
@@ -39,25 +37,25 @@ function watchWeap(now: Weapon[], prev: Weapon[]) {
     <SharedSelector
       label="Limited Characters"
       :options="character.limited"
-      v-model="charLimited"
+      v-model="store.data.limitedChars"
       toggle-attribute="isWellBuild"
     />
     <SharedSelector
       label="Standard Characters"
       :options="character.standard"
-      v-model="charStandard"
+      v-model="store.data.standardChars"
       toggle-attribute="isWellBuild"
     />
     <SharedSelector
       label="Limited Weapons"
       :options="weapon.limited"
-      v-model="weapLimited"
+      v-model="store.data.limitedWeaps"
       toggle-attribute="isSignature"
     />
     <SharedSelector
       label="Standard Weapons"
       :options="weapon.standard"
-      v-model="weapStandard"
+      v-model="store.data.standardWeaps"
       toggle-attribute="isSignature"
     />
   </div>

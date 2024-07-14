@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const form = useAccountFormStore();
+const store = useAccountStore();
 
 const birthdayOptions = ['SET', 'UNSET'];
 const mainCharacterOptions = ['Male Aether', 'Female Lumine'];
@@ -35,28 +35,40 @@ const explorationOptions = ['Low Explore', 'Mid Explore', 'High Explore'];
   <UDivider class="mb-4 mt-8" label="Basic Information" />
   <div class="grid grid-cols-4 gap-4">
     <UFormGroup label="No">
-      <UInput v-model="form.basicInfo.no" />
+      <UInput v-model="store.data.no" />
+    </UFormGroup>
+    <UFormGroup label="Username">
+      <UInput v-model="store.data.username" />
+    </UFormGroup>
+    <UFormGroup label="Email">
+      <UInput v-model="store.data.email" />
+    </UFormGroup>
+    <UFormGroup label="Password">
+      <UInput v-model="store.data.password" />
+    </UFormGroup>
+    <UFormGroup label="ID">
+      <UInput v-model="store.data.id" />
     </UFormGroup>
     <UFormGroup label="AR">
-      <UInput v-model="form.basicInfo.adventureRank" />
+      <UInput v-model="store.data.ar" />
     </UFormGroup>
     <UFormGroup label="BD">
-      <USelectMenu v-model="form.basicInfo.birthdayStatus" :options="birthdayOptions" />
+      <USelectMenu v-model="store.data.bd" :options="birthdayOptions" />
     </UFormGroup>
     <UFormGroup label="MC">
-      <USelectMenu v-model="form.basicInfo.mainCharacter" :options="mainCharacterOptions" />
+      <USelectMenu v-model="store.data.mc" :options="mainCharacterOptions" />
     </UFormGroup>
     <UFormGroup label="Primo">
-      <UInput v-model="form.basicInfo.primo" />
+      <UInput v-model="store.data.primo" />
     </UFormGroup>
     <UFormGroup label="Fragile Resin">
-      <UInput v-model="form.basicInfo.resin" />
+      <UInput v-model="store.data.resin" />
     </UFormGroup>
     <UFormGroup label="Archon Quest">
-      <USelectMenu v-model="form.basicInfo.archonQuest" :options="archonQuestOptions" searchable />
+      <USelectMenu v-model="store.data.archonQuest" :options="archonQuestOptions" searchable />
     </UFormGroup>
     <UFormGroup label="Exploration">
-      <USelectMenu v-model="form.basicInfo.exploration" :options="explorationOptions" />
+      <USelectMenu v-model="store.data.exploration" :options="explorationOptions" />
     </UFormGroup>
   </div>
 </template>

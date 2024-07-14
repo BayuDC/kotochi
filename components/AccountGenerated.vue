@@ -1,20 +1,18 @@
 <script setup lang="ts">
-const form = useAccountFormStore();
-
-const description = ref('');
+const store = useAccountStore();
 </script>
 
 <template>
   <UDivider class="mb-4 mt-8" label="Generated Value" />
   <div class="grid grid-cols-4 gap-4">
     <UFormGroup label="Name" class="col-span-3">
-      <UInput v-model="form.generated.name" disabled />
+      <UInput disabled :model-value="store.data.name" />
     </UFormGroup>
     <UFormGroup label="Price">
-      <UInput v-model="form.generated.price" disabled />
+      <UInput disabled :model-value="store.data.price" />
     </UFormGroup>
     <UFormGroup label="Description" class="col-span-4">
-      <UTextarea v-model="description" disabled />
+      <UTextarea :model-value="store.data.description" disabled size="xl" rows="30" />
     </UFormGroup>
   </div>
 </template>
