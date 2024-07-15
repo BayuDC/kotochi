@@ -1,6 +1,6 @@
 export const useAccountStore = defineStore('account', () => {
   const init = {
-    no: '',
+    no: 0,
     username: '',
     email: '',
     password: '',

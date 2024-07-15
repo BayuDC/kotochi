@@ -7,13 +7,15 @@ onMounted(() => {
 onUnmounted(() => {
   store.$reset();
 });
+const { data, execute } = useFetch('/api/accounts', {
+  method: 'post',
+  body: store.data,
+  watch: false,
+  immediate: false,
+});
 
 async function save() {
-  const { data } = await useFetch('/api/account', {
-    method: 'post',
-    body: store.data,
-  });
-
+  await execute();
   return navigateTo('/store');
 }
 </script>

@@ -35,7 +35,7 @@ const explorationOptions = ['Low Explore', 'Mid Explore', 'High Explore'];
   <UDivider class="mb-4 mt-8" label="Basic Information" />
   <div class="grid grid-cols-4 gap-4">
     <UFormGroup label="No">
-      <UInput v-model="store.data.no" />
+      <UInput v-model="store.data.no" type="number" />
     </UFormGroup>
     <UFormGroup label="Username">
       <UInput v-model="store.data.username" />
