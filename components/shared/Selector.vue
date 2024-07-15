@@ -4,6 +4,10 @@ const props = defineProps<{
   toggleAttribute: string;
 }>();
 const model = defineModel<any[]>();
+
+function remove(target: any) {
+  model.value = model.value?.filter(item => item.name != target.name);
+}
 </script>
 
 <template>
@@ -13,6 +17,11 @@ const model = defineModel<any[]>();
         <div class="h-2 w-2 rounded-full bg-green-500 dark:bg-green-400" />
         {{ item.name }}
         <UToggle class="ml-auto" label="Well Build" v-model="item[toggleAttribute]" />
+        <UIcon
+          name="i-heroicons-trash"
+          class="text-gray-400 dark:text-gray-500 hover:dark:text-gray-100 hover:text-gray-900 cursor-pointer"
+          @click="remove(item)"
+        />
       </div>
     </div>
     <USelectMenu
