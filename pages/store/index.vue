@@ -28,7 +28,7 @@ const columns = [
   <div>
     <div class="flex justify-between py-3.5 border-b border-gray-200 dark:border-gray-700">
       <USelectMenu placeholder="Status" :options="['All', 'Sale', 'Sold']" />
-      <UButton label="New Account" to="/store/new" />
+      <UButton label="New Account" to="/store/account/new" />
     </div>
 
     <UTable :rows="data?.accounts" :columns="columns" class="py-10">
@@ -36,7 +36,7 @@ const columns = [
         <USelectMenu :model-value="row.status" :options="['Idle', 'Sale', 'Sold']" />
       </template>
       <template #actions-data="{ row }">
-        <UButton size="xs" :to="'/store/' + row._id">Detail</UButton>
+        <UButton size="xs" :to="'/store/account/' + row._id">Detail</UButton>
       </template>
     </UTable>
   </div>

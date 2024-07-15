@@ -29,6 +29,7 @@ const { execute } = useFetch('/api/accounts', {
 });
 
 onUnmounted(() => {
+  clearNuxtData(['find-account', 'save-account']);
   store.$reset();
 });
 

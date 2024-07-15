@@ -20,6 +20,7 @@ export const useAccountStore = defineStore('account', () => {
     price: '',
     description: '',
     status: '',
+    _id: null,
   };
 
   const data = reactive({ ...init });
