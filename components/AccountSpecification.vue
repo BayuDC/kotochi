@@ -28,6 +28,7 @@ function watchWeap(now: Weapon[], prev: Weapon[]) {
   if (!char) return;
   char.hasSignature = !char.hasSignature;
   weap.isSignature = !weap.isSignature;
+  console.log(weap);
 }
 </script>
 

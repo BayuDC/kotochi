@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await useFetch('/api/accounts');
+const { data } = await useFetch<any>('/api/accounts');
 
 const columns = [
   {
@@ -36,7 +36,7 @@ const columns = [
         <USelectMenu :model-value="row.status" :options="['Idle', 'Sale', 'Sold']" />
       </template>
       <template #actions-data="{ row }">
-        <UButton size="xs" :to="'/store/' + row.no">Detail</UButton>
+        <UButton size="xs" :to="'/store/' + row._id">Detail</UButton>
       </template>
     </UTable>
   </div>
