@@ -47,7 +47,7 @@ const explorationOptions = ['Low Explore', 'Mid Explore', 'High Explore'];
       <UInput v-model="store.data.password" />
     </UFormGroup>
     <UFormGroup label="ID">
-      <UInput v-model="store.data.id" />
+      <UInput v-model="store.data.gameId" />
     </UFormGroup>
     <UFormGroup label="AR">
       <UInput v-model="store.data.ar" />

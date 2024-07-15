@@ -1,10 +1,10 @@
 export const useAccountStore = defineStore('account', () => {
-  const data = reactive({
+  const init = {
     no: '',
     username: '',
     email: '',
     password: '',
-    id: '',
+    gameId: '',
     ar: '',
     bd: '',
     mc: '',
@@ -19,7 +19,10 @@ export const useAccountStore = defineStore('account', () => {
     name: '',
     price: '',
     description: '',
-  });
+    status: '',
+  };
+
+  const data = reactive({ ...init });
 
   function generate() {
     const limitedChars = data.limitedChars.reduce(
@@ -115,5 +118,11 @@ Terimakasih~
     `;
   }
 
-  return { data, generate };
+  return {
+    data,
+    generate,
+    $reset() {
+      Object.assign(data, init);
+    },
+  };
 });

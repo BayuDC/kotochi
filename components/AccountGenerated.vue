@@ -12,7 +12,7 @@ const store = useAccountStore();
       <UInput disabled :model-value="store.data.price" />
     </UFormGroup>
     <UFormGroup label="Description" class="col-span-4">
-      <UTextarea :model-value="store.data.description" disabled size="xl" rows="30" />
+      <UTextarea :model-value="store.data.description" disabled size="xl" :rows="30" />
     </UFormGroup>
   </div>
 </template>
