@@ -29,9 +29,10 @@ export const useAccountStore = defineStore('account', () => {
     const limitedChars = data.limitedChars.reduce(
       (ctx: any, char) => {
         char.isWellBuild ? ctx.well.push(char) : ctx.reg.push(char);
+        if (char.rank && char.rank > 0) ctx.dup += char.rank;
         return ctx;
       },
-      { reg: [], well: [] }
+      { reg: [], well: [], dup: 0 }
     );
     const standardChars = data.standardChars.reduce(
       (ctx: any, char) => {
@@ -43,9 +44,10 @@ export const useAccountStore = defineStore('account', () => {
     const limitedWeaps = data.limitedWeaps.reduce(
       (ctx: any, weap) => {
         weap.isSignature ? ctx.sign.push(weap) : ctx.reg.push(weap);
+        if (weap.rank && weap.rank > 0) ctx.dup += weap.rank;
         return ctx;
       },
-      { reg: [], sign: [] }
+      { reg: [], sign: [], dup: 0 }
     );
     const standardWeaps = data.standardWeaps.reduce(
       (ctx: any, weap) => {
@@ -54,7 +56,6 @@ export const useAccountStore = defineStore('account', () => {
       },
       { reg: [], sign: [] }
     );
-
     const summary =
       limitedChars.reg.length * 30000 +
       limitedChars.well.length * 45000 +
@@ -63,21 +64,27 @@ export const useAccountStore = defineStore('account', () => {
       limitedWeaps.reg.length * 10000 +
       limitedWeaps.sign.length * 15000 +
       standardWeaps.reg.length * 2500 +
-      standardWeaps.sign.length * 5000;
+      standardWeaps.sign.length * 5000 +
+      limitedChars.dup * 25000 +
+      limitedWeaps.dup * 7500;
 
     const profit = Math.round(summary / 50000) * 2500 + 5000;
     data.price = (summary + profit + 10000).toString();
 
     let wellBuildList = limitedChars.well.length
       ? limitedChars.well.reduce((acc: string, char: Character) => {
-          if (char.hasSignature) return acc + ' ' + char.name + '+Sign';
-          return acc + ' ' + char.name;
+          let label = acc + ' ' + char.name;
+          if (char.rank) label += `(C${char.rank})`;
+          if (char.hasSignature) label += '+Sign';
+          return label;
         }, '') + ' SIAP PAKAI '
       : undefined;
     let limitedList = limitedChars.reg.length
       ? limitedChars.reg.reduce((acc: string, char: Character) => {
-          if (char.hasSignature) return acc + ' ' + char.name + '+Sign';
-          return acc + ' ' + char.name;
+          let label = acc + ' ' + char.name;
+          if (char.rank) label += `(C${char.rank})`;
+          if (char.hasSignature) label += '+Sign';
+          return label;
         }, '') + ' '
       : undefined;
     let standardList = data.standardChars.length
@@ -99,13 +106,13 @@ Username : ${data.username == 'UNSET' ? 'UNSET' : 'SET'}
 Email : ${data.email == 'UNSET' ? 'UNSET' : 'SET'}
 
 Limited Character : 
-${data.limitedChars.map(c => '- ' + c.name).join('\r\n') || '- (KOSONG)'}
+${data.limitedChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\r\n') || '- (KOSONG)'}
 Limited Weapon : 
-${data.limitedWeaps.map(w => '- ' + w.name).join('\r\n') || '- (KOSONG)'}
+${data.limitedWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\r\n') || '- (KOSONG)'}
 Standard Character : 
-${data.standardChars.map(c => '- ' + c.name).join('\r\n') || '- (KOSONG)'}
+${data.standardChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\r\n') || '- (KOSONG)'}
 Standard Weapon : 
-${data.standardWeaps.map(w => '- ' + w.name).join('\r\n') || '- (KOSONG)'}
+${data.standardWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\r\n') || '- (KOSONG)'}
 
 Archon Quest : ${data.archonQuest}
 Exploration : ${data.exploration}

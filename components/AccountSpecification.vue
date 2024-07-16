@@ -32,8 +32,8 @@ function watchWeap(now: Weapon[], prev: Weapon[]) {
 </script>
 
 <template>
-  <UDivider class="mb-4 mt-8" label="Character and Weapon" />
-  <div class="grid grid-cols-4 gap-4">
+  <UDivider class="mb-4 mt-8" label="Character" />
+  <div class="grid grid-cols-2 gap-4">
     <SharedSelector
       label="Limited Characters"
       :options="character.limited"
@@ -46,6 +46,9 @@ function watchWeap(now: Weapon[], prev: Weapon[]) {
       v-model="store.data.standardChars"
       toggle-attribute="isWellBuild"
     />
+  </div>
+  <UDivider class="mb-4 mt-8" label="Weapon" />
+  <div class="grid grid-cols-2 gap-4">
     <SharedSelector
       label="Limited Weapons"
       :options="weapon.limited"
