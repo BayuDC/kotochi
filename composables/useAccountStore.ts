@@ -120,8 +120,8 @@ Primogem : ${data.primo}
 Fragile Resin : ${data.resin}
 
 Stok pasti ready ya~ 
-Silakan langsung checkout aja~ 
-Kalau kurang yakin boleh chat kami dulu~ 
+Kalau kurang yakin boleh chat kami dulu aja~ 
+Kalua buru-buru boleh langsung checkout aja~ 
 Terimakasih~
     `;
   }
