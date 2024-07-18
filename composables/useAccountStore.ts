@@ -44,7 +44,7 @@ export const useAccountStore = defineStore('account', () => {
     const limitedWeaps = data.limitedWeaps.reduce(
       (ctx: any, weap) => {
         weap.isSignature ? ctx.sign.push(weap) : ctx.reg.push(weap);
-        if (weap.rank && weap.rank > 0) ctx.dup += weap.rank;
+        if (weap.rank && weap.rank > 1) ctx.dup += weap.rank;
         return ctx;
       },
       { reg: [], sign: [], dup: 0 }
