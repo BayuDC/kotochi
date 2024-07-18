@@ -77,7 +77,7 @@ export const useAccountStore = defineStore('account', () => {
           if (char.rank) label += `(C${char.rank})`;
           if (char.hasSignature) label += '+Sign';
           return label;
-        }, '') + ' SIAP PAKAI '
+        }, '') + ' WELL BUILD '
       : undefined;
     let limitedList = limitedChars.reg.length
       ? limitedChars.reg.reduce((acc: string, char: Character) => {
