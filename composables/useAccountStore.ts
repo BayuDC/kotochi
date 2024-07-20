@@ -98,12 +98,10 @@ export const useAccountStore = defineStore('account', () => {
     data.description = `Cocok buat kamu yang malas mulung primo tapi pengen punya banyak karakter bintang 5 yang keren-keren.
 
 Detail akun
+UID : ${data.gameId.slice(0, -7) + 'xxxxxxx'}
 AR : ${data.ar}
 MC : ${data.mc}
-Server : ASIA
 Birthday : ${data.bd}
-Username : ${data.username == 'UNSET' ? 'UNSET' : 'SET'}
-Email : ${data.email == 'UNSET' ? 'UNSET' : 'SET'}
 
 Limited Character : 
 ${data.limitedChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\r\n') || '- (KOSONG)'}
@@ -119,11 +117,13 @@ Exploration : ${data.exploration}
 Primogem : ${data.primo}
 Fragile Resin : ${data.resin}
 
-Stok pasti ready ya~ 
-Kalau kurang yakin boleh chat kami dulu aja~ 
-Kalua buru-buru boleh langsung checkout aja~ 
-Terimakasih~
-    `;
+Server : ASIA
+Username : ${data.username == 'UNSET' ? 'UNSET' : 'SET'}
+Email : ${data.email == 'UNSET' ? 'UNSET' : 'SET'}
+
+Disarankan untuk chat kami sebelum order untuk mempercepat proses pengiriman setelah checkout~ 
+Kalau buru-buru boleh langsung checkout aja, tapi kalau kami masih tidur mohon ditunggu ya~ 
+Terimakasih~`;
   }
 
   return {
