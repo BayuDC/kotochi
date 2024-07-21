@@ -58,17 +58,17 @@ export const useAccountStore = defineStore('account', () => {
     );
     const summary =
       limitedChars.reg.length * 30000 +
-      limitedChars.well.length * 45000 +
+      limitedChars.well.length * 42500 +
       standardChars.reg.length * 5000 +
       standardChars.well.length * 7500 +
       limitedWeaps.reg.length * 10000 +
-      limitedWeaps.sign.length * 15000 +
+      limitedWeaps.sign.length * 12500 +
       standardWeaps.reg.length * 2500 +
       standardWeaps.sign.length * 5000 +
       limitedChars.dup * 25000 +
       limitedWeaps.dup * 7500;
 
-    const profit = Math.round(summary / 50000) * 2500 + 5000;
+    const profit = Math.round(summary / 50000) * 2500;
     data.price = (summary + profit + 10000).toString();
 
     let wellBuildList = limitedChars.well.length
