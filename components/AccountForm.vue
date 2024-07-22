@@ -35,7 +35,7 @@ onUnmounted(() => {
 
 async function save() {
   await execute();
-  return navigateTo('/store');
+  // return navigateTo('/store');
 }
 </script>
 
@@ -46,6 +46,12 @@ async function save() {
   <UDivider class="mb-4 mt-8" />
   <div class="flex gap-2">
     <UButton label="Generate" @click="store.generate" />
+    <UButton
+      label="Export"
+      :to="'/api/accounts/export?id=' + store.data._id"
+      :download="'Dagangan No ' + store.data.no"
+      external="true"
+    />
     <UButton label="Save" @click="save" class="ml-auto" />
   </div>
 </template>
