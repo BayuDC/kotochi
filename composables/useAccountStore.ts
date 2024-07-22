@@ -104,13 +104,13 @@ MC : ${data.mc}
 Birthday : ${data.bd}
 
 Limited Character : 
-${data.limitedChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\r\n') || '- (KOSONG)'}
+${data.limitedChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\n') || '- (KOSONG)'}
 Limited Weapon : 
-${data.limitedWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\r\n') || '- (KOSONG)'}
+${data.limitedWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\n') || '- (KOSONG)'}
 Standard Character : 
-${data.standardChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\r\n') || '- (KOSONG)'}
+${data.standardChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\n') || '- (KOSONG)'}
 Standard Weapon : 
-${data.standardWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\r\n') || '- (KOSONG)'}
+${data.standardWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\n') || '- (KOSONG)'}
 
 Archon Quest : ${data.archonQuest}
 Exploration : ${data.exploration}
@@ -121,9 +121,7 @@ Server : ASIA
 Username : ${data.username == 'UNSET' ? 'UNSET' : 'SET'}
 Email : ${data.email == 'UNSET' ? 'UNSET' : 'SET'}
 
-Disarankan untuk chat kami sebelum order untuk mempercepat proses pengiriman setelah checkout~ 
-Kalau buru-buru boleh langsung checkout aja, tapi kalau kami masih tidur mohon ditunggu ya~ 
-Terimakasih~`;
+Disarankan untuk chat kami sebelum order untuk mempercepat proses pengiriman setelah checkout~ Kalau buru-buru boleh langsung checkout aja, tapi kalau kami masih tidur mohon ditunggu ya~ Terimakasih~`;
   }
 
   return {
