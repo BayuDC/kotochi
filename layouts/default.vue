@@ -11,6 +11,8 @@ const links = [
     to: '/setting',
   },
 ];
+
+const notify = useNotify();
 </script>
 
 <template>
@@ -27,6 +29,22 @@ const links = [
       <UContainer>
         <slot />
       </UContainer>
+      <Transition
+        enter-to-class="translate-y-0"
+        enter-from-class="translate-y-full"
+        leave-from-class="translate-y-0"
+        leave-to-class="translate-y-full"
+      >
+        <div
+          :key="notify.id"
+          v-show="notify.show"
+          class="fixed bottom-0 w-full p-10 flex justify-center duration-200 ease-in-out"
+        >
+          <div class="w-96">
+            <UAlert :title="notify.message" color="primary" variant="solid" />
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>

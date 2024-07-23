@@ -4,6 +4,7 @@ const props = defineProps<{
 }>();
 
 const store = useAccountStore();
+const notify = useNotify();
 
 if (props.id) {
   const { data } = await useFetch<any>('/api/accounts', {
@@ -35,6 +36,8 @@ onUnmounted(() => {
 
 async function save() {
   await execute();
+  notify.push('Saved successfully!');
+
   // return navigateTo('/store');
 }
 </script>
@@ -50,7 +53,7 @@ async function save() {
       label="Export"
       :to="'/api/accounts/export?id=' + store.data._id"
       :download="'Dagangan No ' + store.data.no"
-      external="true"
+      :external="true"
     />
     <UButton label="Save" @click="save" class="ml-auto" />
   </div>
