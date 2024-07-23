@@ -26,17 +26,33 @@ const columns = [
 
 <template>
   <div>
-    <div class="flex justify-between py-3.5 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex py-3.5 border-b border-gray-200 dark:border-gray-700 gap-2">
       <USelectMenu placeholder="Status" :options="['All', 'Sale', 'Sold']" />
-      <UButton label="New Account" to="/account/new" />
+      <USelectMenu placeholder="MC" :options="[]" />
+      <USelectMenu placeholder="AR" :options="[]" />
+      <USelectMenu placeholder="Story" :options="[]" />
+      <USelectMenu placeholder="Explore" :options="[]" />
+      <USelectMenu placeholder="Character" :options="[]" />
+      <USelectMenu placeholder="Weapon" :options="[]" />
+      <UButton class="ml-auto" label="New Account" to="/account/new" />
     </div>
 
     <UTable :rows="data?.accounts" :columns="columns" class="py-10">
+      <template #name-data="{ row }">
+        <div class="grid">
+          <div class="truncate overflow-hidden">{{ row.name }}</div>
+        </div>
+      </template>
       <template #status-data="{ row }">
-        <USelectMenu :model-value="row.status" :options="['Idle', 'Sale', 'Sold']" />
+        <div class="w-20">
+          <USelectMenu :model-value="row.status" :options="['Idle', 'Sale', 'Sold']" />
+        </div>
       </template>
       <template #actions-data="{ row }">
-        <UButton size="xs" :to="'/account/' + row._id">Detail</UButton>
+        <div class="flex gap-2">
+          <UButton size="xs" :to="'/account/' + row._id">Detail</UButton>
+          <UButton size="xs" :to="'/account/' + row._id">Export</UButton>
+        </div>
       </template>
     </UTable>
   </div>
