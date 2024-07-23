@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const links = [
   {
-    label: 'Store',
+    label: 'Home',
     icon: 'i-heroicons-building-storefront',
-    to: '/store',
+    to: '/',
   },
   {
     label: 'Setting',

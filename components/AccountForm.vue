@@ -16,6 +16,9 @@ if (props.id) {
   if (!data.value) throw createError({ statusCode: 404 });
 
   Object.assign(store.data, data.value?.account);
+  useHead({
+    title: `Account ${store.data.no} - Shirayuki Store`,
+  });
 } else {
   store.data.status = 'Idle';
 }
