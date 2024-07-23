@@ -51,7 +51,13 @@ const columns = [
       <template #actions-data="{ row }">
         <div class="flex gap-2">
           <UButton size="xs" :to="'/account/' + row._id">Detail</UButton>
-          <UButton size="xs" :to="'/account/' + row._id">Export</UButton>
+          <UButton
+            size="xs"
+            :to="'/api/accounts/export?id=' + row._id"
+            :download="'Dagangan No ' + row.no"
+            :external="true"
+            >Export</UButton
+          >
         </div>
       </template>
     </UTable>
