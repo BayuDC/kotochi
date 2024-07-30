@@ -28,12 +28,13 @@ function rankDown(target: any) {
   <UFormGroup>
     <div class="mb-2">
       <div v-for="item in model as any[]" class="flex items-center gap-2">
-        <div class="h-2 w-2 rounded-full bg-green-500 dark:bg-green-400" />
-        <div class="whitespace-nowrap">
+        <div class="whitespace-nowrap flex items-center gap-2">
+          <div class="block h-2 w-2 rounded-full bg-green-500 dark:bg-green-400" />
           {{ item.name }}
         </div>
-        <div class="w-full h-0.5 bg-green-400"></div>
         <span v-if="item.rank">({{ item.rank }})</span>
+        <div class="w-full h-0.5 bg-green-400"></div>
+        <!-- <div><UInput size="2xs" class="w-20" /></div> -->
 
         <div class="w-4 h-4">
           <UIcon

@@ -17,8 +17,11 @@ export const useAccountStore = defineStore('account', () => {
     standardChars: [] as Character[],
     standardWeaps: [] as Weapon[],
     name: '',
+    name2: '',
     price: '',
+    ads: '',
     description: '',
+    description2: '',
     status: '',
     _id: null,
   };
@@ -70,6 +73,7 @@ export const useAccountStore = defineStore('account', () => {
 
     const profit = Math.round(summary / 50000) * 2500 - 5000;
     data.price = (summary + profit + 10000).toString();
+    data.ads = (Math.ceil((summary + profit + 10000) / 25000) * 2500 + 17500).toString();
 
     let wellBuildList = limitedChars.well.length
       ? limitedChars.well.reduce((acc: string, char: Character) => {
@@ -79,6 +83,16 @@ export const useAccountStore = defineStore('account', () => {
           return label;
         }, '') + ' WELL BUILD '
       : undefined;
+    let wellBuildList2 = limitedChars.well.length
+      ? limitedChars.well
+          .map((char: Character) => {
+            let label = char.name;
+            if (char.rank) label += ` C${char.rank}`;
+            if (char.hasSignature) label += ' Sign';
+            return label;
+          })
+          .join(', ') + ' WELL BUILD'
+      : undefined;
     let limitedList = limitedChars.reg.length
       ? limitedChars.reg.reduce((acc: string, char: Character) => {
           let label = acc + ' ' + char.name;
@@ -87,13 +101,27 @@ export const useAccountStore = defineStore('account', () => {
           return label;
         }, '') + ' '
       : undefined;
+    let limitedList2 = limitedChars.reg.length
+      ? limitedChars.reg
+          .map((char: Character) => {
+            let label = char.name;
+            if (char.rank) label += ` C${char.rank}`;
+            if (char.hasSignature) label += ' Sign';
+            return label;
+          })
+          .join(', ')
+      : '';
     let standardList = data.standardChars.length
       ? data.standardChars.reduce((acc, char) => acc + ' ' + char.name, '') + ' '
       : undefined;
+    let standardList2 = data.standardChars.length ? data.standardChars.map(c => c.name).join(', ') : '';
 
     data.name = `[${data.limitedChars.length} Limit]${[wellBuildList, limitedList, standardList]
       .filter(c => c)
       .join('|')}[AR${data.ar}][${data.limitedChars.length + data.standardChars.length}B5]`;
+    data.name2 = `Akun ${data.limitedChars.length} Limit - ${[wellBuildList2, limitedList2, standardList2]
+      .filter(c => c)
+      .join(' - ')} - AR${data.ar} ID${data.gameId.slice(0, -7)}`;
 
     data.description = `Cocok buat kamu yang malas mulung primo tapi pengen punya banyak karakter bintang 5 yang keren-keren.
 
@@ -122,6 +150,30 @@ Username : ${data.username == 'UNSET' ? 'UNSET' : 'SET'}
 Email : ${data.email == 'UNSET' ? 'UNSET' : 'SET'}
 
 Disarankan untuk chat kami sebelum order untuk mempercepat proses pengiriman setelah checkout~ Kalau buru-buru boleh langsung checkout aja, tapi kalau kami masih tidur mohon ditunggu ya~ Terimakasih~`;
+    data.description2 = `Akun ${data.limitedChars.length} Limit ${data.standardChars.length} Standard 
+MC ${data.mc}
+ID ${data.gameId.slice(0, -7) + '*******'}
+Server Asia
+
+Karakter B5 Limited 
+${data.limitedChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\n') || '- (TIDAK ADA)'}
+
+Karakter B5 Standard
+${data.standardChars.map(c => `- ${c.name} ${c.rank ? 'C' + c.rank : ''}`).join('\n') || '- (TIDAK ADA)'}
+
+Senjata B5 Limited 
+${data.limitedWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\n') || '- (TIDAK ADA)'}
+
+Senjata B5 Standard
+${data.standardWeaps.map(w => `- ${w.name} ${w.rank ? 'R' + w.rank : ''}`).join('\n') || '- (TIDAK ADA)'}
+
+Detail Lainnya
+Primogem : ${data.primo}
+Fragile Resin: ${data.resin}
+Login : Hoyo via username/email dan password
+Minus : TIDAK ADA
+
+Jika ada yang belum jelas boleh ditanyakan langsung lewat chat ya`;
   }
 
   return {
