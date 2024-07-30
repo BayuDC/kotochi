@@ -38,7 +38,7 @@ const notify = useNotify();
         <div
           :key="notify.id"
           v-show="notify.show"
-          class="fixed bottom-0 w-full p-10 flex justify-center duration-200 ease-in-out"
+          class="fixed left-[50%] -translate-x-[50%] bottom-0 p-10 flex justify-center duration-200 ease-in-out"
         >
           <div class="w-96">
             <UAlert :title="notify.message" color="primary" variant="solid" />

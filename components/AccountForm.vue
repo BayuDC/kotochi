@@ -41,7 +41,7 @@ async function save() {
   await execute();
   notify.push('Saved successfully!');
 
-  // return navigateTo('/store');
+  return navigateTo('/store');
 }
 </script>
 
