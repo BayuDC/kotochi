@@ -58,6 +58,13 @@ const columns = [
             :external="true"
             >Export</UButton
           >
+          <UButton
+            size="xs"
+            :to="`/api/accounts/export?id=${row._id}&alt=true`"
+            :download="'Dagangan No ' + row.no + ' Alt'"
+            :external="true"
+            >Export 2</UButton
+          >
         </div>
       </template>
     </UTable>

@@ -458,7 +458,7 @@ export default defineEventHandler(async event => {
   const account = (await Account.findById(query.id)) as any;
   if (!account) return createError({ statusCode: 404 });
   return {
-    title: 'Dagangan No ' + account.no,
+    title: 'Dagangan No ' + account.no + (query.alt ? ' Alt' : ''),
     steps: [
       // ? Opening
       {
@@ -556,7 +556,7 @@ export default defineEventHandler(async event => {
       },
       {
         type: 'change',
-        value: account.name,
+        value: query.alt ? account.name2 : account.name,
         selectors: [
           ['aria/Masukkan nama item yang kamu jual'],
           ['#product-name'],
@@ -569,7 +569,7 @@ export default defineEventHandler(async event => {
         type: 'click',
         target: 'main',
         selectors: [
-          [`aria/Tambahkan '${account.name}'`],
+          [`aria/Tambahkan '${query.alt ? account.name2 : account.name}'`],
           ['#product-name-option-0'],
           ['xpath///*[@id="product-name-option-0"]'],
           ['pierce/#product-name-option-0'],
@@ -744,6 +744,30 @@ export default defineEventHandler(async event => {
           ['pierce/#attribute-number-14'],
         ],
         target: 'main',
+      },
+
+      // ? description
+      {
+        type: 'click',
+        target: 'main',
+        selectors: [
+          ['#product-description'],
+          ['xpath///*[@id="product-description"]'],
+          ['pierce/#product-description'],
+        ],
+        offsetY: 48,
+        offsetX: 222,
+      },
+      {
+        type: 'change',
+        value: query.alt ? account.description2 : account.description,
+        selectors: [
+          ['#product-description'],
+          ['xpath///*[@id="product-description"]'],
+          ['pierce/#product-description'],
+        ],
+        target: 'main',
+        timeout: 30000,
       },
 
       // ? ending
