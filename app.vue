@@ -1,6 +1,6 @@
 <template>
   <Head>
-    <Title>Shirayuki Store</Title>
+    <Title>Kotochi Store</Title>
   </Head>
   <Body>
     <NuxtLoadingIndicator />

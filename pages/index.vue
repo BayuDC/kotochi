@@ -1,13 +1,14 @@
 <script setup lang="ts">
 const { data } = await useFetch<any>('/api/accounts');
 
-const columns = [
+const store = ref('Shirayuki Store');
+const columns = computed(() => [
   {
     key: 'no',
     label: 'No',
   },
   {
-    key: 'name',
+    key: store.value == 'Shirayuki Store' ? 'name' : 'name2',
     label: 'Name',
   },
   {
@@ -15,25 +16,19 @@ const columns = [
     label: 'Price',
   },
   {
-    key: 'status',
-    label: 'Status',
+    key: 'ads',
+    label: 'Ads',
   },
   {
     key: 'actions',
   },
-];
+]);
 </script>
 
 <template>
   <div>
     <div class="flex py-3.5 border-b border-gray-200 dark:border-gray-700 gap-2">
-      <USelectMenu placeholder="Status" :options="['All', 'Sale', 'Sold']" />
-      <USelectMenu placeholder="MC" :options="[]" />
-      <USelectMenu placeholder="AR" :options="[]" />
-      <USelectMenu placeholder="Story" :options="[]" />
-      <USelectMenu placeholder="Explore" :options="[]" />
-      <USelectMenu placeholder="Character" :options="[]" />
-      <USelectMenu placeholder="Weapon" :options="[]" />
+      <USelectMenu class="w-40" placeholder="Store" :options="['Shirayuki Store', 'Pecinta Kopi']" v-model="store" />
       <UButton class="ml-auto" label="New Account" to="/account/new" />
     </div>
 
@@ -43,9 +38,9 @@ const columns = [
           <div class="truncate overflow-hidden">{{ row.name }}</div>
         </div>
       </template>
-      <template #status-data="{ row }">
-        <div class="w-20">
-          <USelectMenu :model-value="row.status" :options="['Idle', 'Sale', 'Sold']" />
+      <template #name2-data="{ row }">
+        <div class="grid">
+          <div class="truncate overflow-hidden">{{ row.name2 }}</div>
         </div>
       </template>
       <template #actions-data="{ row }">
@@ -53,17 +48,10 @@ const columns = [
           <UButton size="xs" :to="'/account/' + row._id">Detail</UButton>
           <UButton
             size="xs"
-            :to="'/api/accounts/export?id=' + row._id"
-            :download="'Dagangan No ' + row.no"
+            :to="`/api/accounts/export?id=${row._id}${store == 'Pecinta Kopi' ? '&alt=true' : ''}`"
+            :download="`Dagangan No ${row.no}${store == 'Pecinta Kopi' ? ' Alt' : ''}`"
             :external="true"
             >Export</UButton
-          >
-          <UButton
-            size="xs"
-            :to="`/api/accounts/export?id=${row._id}&alt=true`"
-            :download="'Dagangan No ' + row.no + ' Alt'"
-            :external="true"
-            >Export 2</UButton
           >
         </div>
       </template>

@@ -19,7 +19,7 @@ const notify = useNotify();
   <div>
     <div class="border-b border-gray-200 dark:border-gray-800">
       <UContainer class="flex items-center justify-between">
-        <h1 class="text-xl font-bold">Shirayuki Store</h1>
+        <h1 class="text-xl font-bold">Kotochi Store</h1>
         <div>
           <UHorizontalNavigation :links="links" />
         </div>

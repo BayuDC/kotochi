@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'New Account - Shirayuki Store',
+  title: 'New Account - Kotochi Store',
 });
 </script>
 

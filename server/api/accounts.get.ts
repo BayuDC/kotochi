@@ -13,8 +13,10 @@ export default defineEventHandler(async event => {
     {
       no: true,
       name: true,
+      name2: true,
       price: true,
       status: true,
+      ads: true,
     }
   );
 

@@ -17,7 +17,7 @@ if (props.id) {
 
   Object.assign(store.data, data.value?.account);
   useHead({
-    title: `Account ${store.data.no} - Shirayuki Store`,
+    title: `Account ${store.data.no} - Kotochi Store`,
   });
 } else {
   store.data.status = 'Idle';
