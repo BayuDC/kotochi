@@ -18,7 +18,7 @@ export default defineEventHandler(async event => {
       status: true,
       ads: true,
     }
-  );
+  ).sort({ no: -1 });
 
   return { accounts };
 });
