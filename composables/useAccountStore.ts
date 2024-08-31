@@ -23,6 +23,7 @@ export const useAccountStore = defineStore('account', () => {
     description: '',
     description2: '',
     status: '',
+    minus: '',
     _id: null,
   };
 
@@ -118,10 +119,12 @@ export const useAccountStore = defineStore('account', () => {
 
     data.name = `[${data.limitedChars.length} Limit]${[wellBuildList, limitedList, standardList]
       .filter(c => c)
-      .join('|')}[AR${data.ar}][${data.limitedChars.length + data.standardChars.length}B5]`;
+      .join('|')}[AR${data.ar}][${data.limitedChars.length + data.standardChars.length}B5]${
+      data.minus ? '[MINUS]' : ''
+    }`;
     data.name2 = `Akun ${data.limitedChars.length} Limit - ${[wellBuildList2, limitedList2, standardList2]
       .filter(c => c)
-      .join(' - ')} - AR${data.ar} ID${data.gameId.slice(0, -7)}`;
+      .join(' - ')} - AR${data.ar} ID${data.gameId.slice(0, -7)} ${data.minus ? '- MINUS' : ''}`;
 
     data.description = `Cocok buat kamu yang malas mulung primo tapi pengen punya banyak karakter bintang 5 yang keren-keren.
 
@@ -149,6 +152,8 @@ Server : ASIA
 Username : ${data.username == 'UNSET' ? 'UNSET' : 'SET'}
 Email : ${data.email == 'UNSET' ? 'UNSET' : 'SET'}
 
+MINUS : ${data.minus || '-'}
+
 Disarankan untuk chat kami sebelum order untuk mempercepat proses pengiriman setelah checkout~ Kalau buru-buru boleh langsung checkout aja, tapi kalau kami masih tidur mohon ditunggu ya~ Terimakasih~`;
     data.description2 = `Akun ${data.limitedChars.length} Limit ${data.standardChars.length} Standard 
 MC ${data.mc}
@@ -171,7 +176,8 @@ Detail Lainnya
 Primogem : ${data.primo}
 Fragile Resin: ${data.resin}
 Login : Hoyo via username/email dan password
-Minus : TIDAK ADA
+
+MINUS : ${data.minus || '-'}
 
 Jika ada yang belum jelas boleh ditanyakan langsung lewat chat ya`;
   }

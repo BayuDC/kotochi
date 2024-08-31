@@ -58,17 +58,20 @@ const explorationOptions = ['Low Explore', 'Mid Explore', 'High Explore'];
     <UFormGroup label="MC">
       <USelectMenu v-model="store.data.mc" :options="mainCharacterOptions" />
     </UFormGroup>
-    <UFormGroup label="Primo">
-      <UInput v-model="store.data.primo" />
-    </UFormGroup>
     <UFormGroup label="Fragile Resin">
       <UInput v-model="store.data.resin" />
+    </UFormGroup>
+    <UFormGroup label="Primo">
+      <UInput v-model="store.data.primo" />
     </UFormGroup>
     <UFormGroup label="Archon Quest">
       <USelectMenu v-model="store.data.archonQuest" :options="archonQuestOptions" searchable />
     </UFormGroup>
     <UFormGroup label="Exploration">
       <USelectMenu v-model="store.data.exploration" :options="explorationOptions" />
+    </UFormGroup>
+    <UFormGroup label="Minus" class="col-span-4">
+      <UInput v-model="store.data.minus" />
     </UFormGroup>
   </div>
 </template>
