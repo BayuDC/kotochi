@@ -27,6 +27,8 @@ const archonQuestOptions = [
   'Fontaine Bagian 4',
   'Fontaine Bagian 5',
   'Fontaine Bagian 6',
+  'Natlan Bagian 1',
+  'Natlan Bagian 2'
 ];
 const explorationOptions = ['Low Explore', 'Mid Explore', 'High Explore'];
 </script>
