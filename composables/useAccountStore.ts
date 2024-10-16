@@ -61,16 +61,16 @@ export const useAccountStore = defineStore('account', () => {
       { reg: [], sign: [] }
     );
     const summary =
-      limitedChars.reg.length * 40000 +
-      limitedChars.well.length * 55000 +
+      limitedChars.reg.length * 42500 +
+      limitedChars.well.length * 57500 +
       standardChars.reg.length * 5000 +
       standardChars.well.length * 7500 +
       limitedWeaps.reg.length * 15000 +
       limitedWeaps.sign.length * 20000 +
       standardWeaps.reg.length * 2500 +
       standardWeaps.sign.length * 5000 +
-      limitedChars.dup * 35000 +
-      limitedWeaps.dup * 10000;
+      limitedChars.dup * 37500 +
+      limitedWeaps.dup * 12500;
 
     const profit = Math.round(summary / 50000) * 2500;
     data.price = (summary + profit + 10000).toString();
